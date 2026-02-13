@@ -23,44 +23,122 @@ except Exception as e:
     st.error("🚨 Groq API Key is missing. Please check .streamlit/secrets.toml")
     st.stop()
 
-# CSS for FAQ buttons
+# CSS for UI Styling
+# CSS for Skypay Support Bot - Consolidated Style
 st.markdown(f"""
     <style>
-        .stApp {{ background-color: #ffffff; }}
+        /* 0. FORCE LIGHT THEME BASE */
+        :root {{
+            --background-color: #ffffff;
+            --secondary-background-color: #eeeeee;
+            --primary-color: #023e8a;
+        }}
+
+        .stApp {{ 
+            background-color: #ffffff !important; 
+        }}
         
-        /* Hello & Ticket text to Black */
-        h1, h2, h3, [data-testid="stHeader"] {{
+        /* 1. GLOBAL TEXT - Force everything to Black */
+        /* Except inside buttons and sidebar */
+        .stAppHost, .stApp, .stApp * {{
+            color: #000000;
+        }}
+
+        /* 2. HEADERS & LABELS */
+        h1, h2, h3, [data-testid="stHeader"], [data-testid="stWidgetLabel"] p {{
             color: #000000 !important;
             font-weight: 700 !important;
         }}
 
-        /* Force Black Text in Chat */
-        [data-testid="stChatMessageContent"] p {{
-            color: #000000 !important;
+        /* 3. INPUT FIELDS & DROPDOWNS - Light Gray */
+        div[data-baseweb="input"], 
+        div[data-baseweb="select"] > div, 
+        div[data-baseweb="base-input"] {{
+            background-color: #eeeeee !important; 
+            border: 1px solid #cccccc !important;
+            border-radius: 8px !important;
         }}
 
-        /* User Message Bubble - Sky Blue */
-        .stChatMessage:has([data-testid="chatAvatarIcon-user"]) {{
-            background-color: #7dcef4;
-            border-radius: 15px 15px 0px 15px;
+        /* Force Black Text for typing and selection */
+        input, textarea, [data-testid="stSelectbox"] div {{
+            color: #000000 !important;
+            -webkit-text-fill-color: #000000 !important;
+        }}
+
+        /* 4. CHAT INPUT (TALK TO AI) - Blue Border & White BG */
+        [data-testid="stChatInput"] {{
+            background-color: #ffffff !important;
+            border-top: 1px solid #eeeeee !important;
+            padding-top: 10px !important;
+        }}
+
+        [data-testid="stChatInput"] textarea {{
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border: 2px solid #023e8a !important; 
+            border-radius: 12px !important;
+            -webkit-text-fill-color: #000000 !important;
+        }}
+
+        /* 5. UNIFIED BUTTONS - Dark Blue with White Text */
+        div.stButton > button, [data-testid="stForm"] button {{
+            background-color: #023e8a !important; 
+            border: 2px solid #023e8a !important; 
+            border-radius: 8px !important;
+            width: 100% !important;
+            transition: all 0.3s ease !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+        }}
+
+        /* Force button labels to stay white */
+        div.stButton > button p, [data-testid="stForm"] button p {{
+            color: #ffffff !important;
+        }}
+
+        /* GREEN HOVER STATE for all buttons */
+        div.stButton > button:hover, [data-testid="stForm"] button:hover {{
+            background-color: #28a745 !important; 
+            border-color: #28a745 !important;
+            color: #ffffff !important;
+        }}
+
+        /* 6. CHAT BUBBLES */
+        [data-testid="stChatMessageContent"] p {{ 
+            color: #000000 !important; 
         }}
         
-        /* Assistant Message Bubble - Neutral Gray */
+        .stChatMessage:has([data-testid="chatAvatarIcon-user"]) {{
+            background-color: #7dcef4 !important;
+        }}
+        
         .stChatMessage:has([data-testid="chatAvatarIcon-assistant"]) {{
-            background-color: #f1f3f4;
-            border: 1px solid #929a9f;
-            border-radius: 15px 15px 15px 0px;
+            background-color: #f1f3f4 !important;
         }}
 
-        /* Sidebar - Deep Blue */
-        [data-testid="stSidebar"] {{ background-color: #023e8a; }}
-        [data-testid="stSidebar"] * {{ color: #ffffff !important; }}
+        /* 7. ESCALATION BOX - Light Blue Border */
+        .escalation-box {{
+            border: 1px solid #7dcef4 !important;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #f0faff;
+            margin: 10px 0;
+            color: #000000 !important;
+            font-weight: 500;
+        }}
 
-        /* FAQ Buttons - Action Blue */
-        div.stButton > button {{
-            border: 2px solid #0068b7;
-            color: #0068b7;
-            background-color: #ffffff;
+        /* 8. SIDEBAR - Preserve Deep Blue with White Text */
+        [data-testid="stSidebar"] {{ 
+            background-color: #023e8a !important; 
+        }}
+        
+        [data-testid="stSidebar"] * {{
+            color: #ffffff !important;
+        }}
+        
+        /* Ensure sidebar buttons also use white text */
+        [data-testid="stSidebar"] button p {{
+            color: #ffffff !important;
         }}
     </style>
 """, unsafe_allow_html=True)
@@ -81,66 +159,23 @@ def get_avatar(role):
         return skypay_img if os.path.exists(skypay_img) else "assistant"
 
 # =========================
-# FULL PRESET ANSWERS (Restored)
-# =========================
-PRESET_ANSWERS = {
-    "What is SkyPay?": """**What is SkyPay?** SkyPay (formerly known as SkyBridge Payment, Inc.) is a Philippines-based fintech company that specializes in payment gateway services and digital payment solutions. It operates primarily as a payment bridge connecting merchants, financial institutions, lenders, billers, and enterprise platforms.
-
-**SkyPay Office Hours:** I couldn't find any publicly available information on the current office hours of SkyPay. As a support agent, I can tell you that we are available to assist customers during our business hours, which typically run from 9:00 AM to 6:00 PM Philippine Standard Time (GST).""",
-
-    "Is SkyPay a scam?": """**Is SkyPay a scam?** No, SkyPay is a legitimate company. It is a publicly traded company listed on the OTC Market Group under the ticker symbol SKYPAY, and it is also a BSP-licensed fintech firm. As an SEC-registered company, SkyPay operates transparently and follows regulatory guidelines.""",
-
-    "What are SkyPay office hours?": """I'm a Skypay support agent.
-
-SkyPay is a digital payment platform that allows individuals and businesses to make secure, fast, and convenient transactions.
-
-Our office hours are as follows:
-**Monday to Friday: 9:00 AM to 6:00 PM**
-Please note that these hours apply to our two primary office locations in Mandaluyong City.""",
-
-    "What are SkyPay's services?": """As a Skypay support agent, I'm happy to inform you about the various services we offer:
-
-* **Over-the-Counter (OTC) and Digital Payment Collections**
-* **Cash Payouts**
-* **Bill Payments**: We partner with over 200 biller partners.
-* **Value-Added Services**: Buy Load, Top Up, Cash In.
-
-**Disbursement Channels Supported:**
-* **InstaPay**
-* **PESONet**""",
-
-    "How do I contact SkyPay support?": """To contact SkyPay support, you can reach us through the following channels:
-
-* **Email:** You can email us at cs@skypay.ph for any payment-related concerns or questions.
-* **Phone Numbers:** Please visit our official website to find the latest phone numbers and contact details.""",
-
-    "How do I use SkyPay?": """**Using SkyPay:** To use SkyPay, follow these general steps:
-1. Go to the website of the merchant or biller you want to pay.
-2. Select SkyPay as your preferred payment method.
-3. Follow the prompts to log in to your SkyPay account or enter your payment details.
-4. Review and confirm your transaction.""",
-
-    "Is SkyPay a loaning company?": """**Is SkyPay a loaning company?** No, SkyPay is not a loaning company. We are a payment solutions company that connects merchants, financial institutions, lenders, billers, and enterprise platforms to facilitate secure and convenient transactions. Any money received or collected via SkyPay originates from third-party loaning apps/companies or billers, not from us."""
-}
-
-# =========================
-# Sidebar & Testing Tools (RESTORED)
-# =========================
-with st.sidebar:
-    st.header("🧪 Testing Tools")
-    if st.button("🚀 Simulate New Chat"):
-        for key in list(st.session_state.keys()):
-            del st.session_state[key]
-        st.rerun()
-
-# =========================
-# Context Logic
+# CONSTANTS & PRESETS
 # =========================
 OFF_TOPIC = "I'm sorry, but I can only answer inquiries regarding SkyPay services. I cannot assist with general knowledge questions."
 UNSURE = "I'm not sure about that yet, but I can help escalate it."
 
+PRESET_ANSWERS = {
+    "What is SkyPay?": "SkyPay is a Philippines-based fintech company specializing in payment gateway services. We connect merchants, financial institutions, and billers.",
+    "Is SkyPay a scam?": "No, SkyPay is a legitimate, BSP-licensed fintech firm and SEC-registered company.",
+    "What are SkyPay office hours?": "Our office hours are Monday to Friday: 9:00 AM to 6:00 PM Philippine Standard Time.",
+    "What are SkyPay's services?": "We offer OTC and Digital Collections, Cash Payouts, Bill Payments (200+ partners), and Disbursement via InstaPay/PESONet.",
+    "How do I contact SkyPay support?": "Email us at cs@skypay.ph for any payment-related concerns.",
+    "Is SkyPay a loaning company?": "No, SkyPay is a payment solution provider. We facilitate payments for third-party lenders but do not issue loans ourselves."
+}
+
 def get_fuzzy_context(query):
     try:
+        if not os.path.exists("knowledge.txt"): return ""
         with open("knowledge.txt", "r", encoding="utf-8") as f:
             lines = [l.strip() for l in f.readlines() if len(l.strip()) > 10]
         matches = process.extract(query, lines, scorer=fuzz.token_set_ratio, limit=3)
@@ -162,71 +197,61 @@ if status == 'onboarding':
     st.subheader("👋 Welcome to Skypay Support!")
     with st.form("onboarding"):
         name = st.text_input("What is your name?")
-        email_input = st.text_input("What is your email address?", placeholder="e.g. name@domain.com")
+        email_input = st.text_input("What is your email address?")
         topic = st.selectbox("Type of concern?", ["Inquiries", "Partnerships", "Others"])
-        
         if st.form_submit_button("Start Chat"):
             if not name.strip() or not email_input.strip() or not is_valid_email(email_input):
                 st.error("Please provide a valid name and email.")
             else:
                 update_onboarding(cid, name, topic, email_input)
-                add_message(cid, "system", f"User: {name} ({email_input}), Concern: {topic}")
+                add_message(cid, "system", f"User: {name}, Email: {email_input}")
                 st.rerun()
-    st.stop()
-
-# =========================
-# CLOSED STATE
-# =========================
-if status == 'closed':
-    st.title(f"🤖 Goodbye, {user_name}!")
-    st.success(f"Ticket {ticket_id} has been resolved.")
-    for r, c in get_messages(cid):
-        if r != "system":
-            with st.chat_message(r, avatar=get_avatar(r)): 
-                st.write(f"👩‍💻 {c}" if r == "human" else c)
     st.stop()
 
 # =========================
 # CHAT INTERFACE
 # =========================
 st.title(f"🤖 Hello, {user_name}!")
-st.subheader(f"Ticket: {ticket_id}")
-
 human_active = status in ['escalated', 'human_active']
 
+# Sidebar Testing Tools
+with st.sidebar:
+    if st.button("🚀 Simulate New Chat"):
+        for key in list(st.session_state.keys()): del st.session_state[key]
+        st.rerun()
+
+# Display FAQ Buttons
 if not human_active:
     st.markdown("### FAQs")
-    cols = st.columns(4)
-    presets = list(PRESET_ANSWERS.keys())
-    for i, q in enumerate(presets):
-        if cols[i % 4].button(q): st.session_state.curr_prompt = q
+    cols = st.columns(3)
+    for i, q in enumerate(list(PRESET_ANSWERS.keys())):
+        if cols[i % 3].button(q): st.session_state.curr_prompt = q
 
-# --- DISPLAY MESSAGES & DETECT REFUSALS ---
+# --- DISPLAY MESSAGES & DYNAMIC ESCALATION DETECTION ---
 db_msgs = get_messages(cid)
 show_esc = False
-
-# RESTORED FULL KEYWORD LIST
-refusal_keywords = [
-    "i'm sorry", "cannot assist", "support agent", "escalate", 
-    "unrelated", "can only assist", "not sure", "don't have information", 
-    "no information", "unable to answer", "don't know", "unsure",
-    "click the button", "button below", "talk to support agent"
-]
 
 for r, c in db_msgs:
     if r != "system":
         with st.chat_message(r, avatar=get_avatar(r)):
             st.write(f"👩‍💻 {c}" if r == "human" else c)
-    
-    if r == "ai":
-        clean_content = c.lower()
-        if any(k in clean_content for k in refusal_keywords) or OFF_TOPIC.lower() in clean_content or UNSURE.lower() in clean_content:
+
+# FIX: Only trigger the button if the LAST AI message was a refusal
+if db_msgs:
+    last_role, last_content = db_msgs[-1]
+    if last_role == "ai":
+        # Check for specific refusal triggers
+        is_refusal = (
+            last_content.strip() == OFF_TOPIC or 
+            last_content.strip() == UNSURE or 
+            "cannot assist" in last_content.lower() or
+            "not sure" in last_content.lower()
+        )
+        if is_refusal:
             show_esc = True
 
 if human_active:
-    st.warning("⚠️ **Note:** This has now been escalated to a Support Agent. Official work hours: 9:00 AM - 6:00 PM.")
-else:
-    st.info("💡 **Tip:** SkyPay AI is powered by Groq and responds instantly.")
+    st.warning("⚠️ This chat is escalated to a Support Agent (9AM - 6PM).")
 
 # =========================
 # INPUT HANDLING
@@ -241,9 +266,10 @@ if prompt:
     add_message(cid, "user", prompt)
     
     if not human_active:
+        # --- ADDED SPINNER FOR PRESET ANSWERS ---
         if prompt in PRESET_ANSWERS:
             with st.spinner("Skypay AI is thinking..."):
-                time.sleep(1)
+                time.sleep(1) # Simulated delay
                 add_message(cid, "ai", PRESET_ANSWERS[prompt])
         else:
             # 2. History & Context
@@ -253,22 +279,23 @@ if prompt:
             ctx = get_fuzzy_context(prompt)
             skypay_keywords = ["skypay", "skybridge", "payment", "bills", "loan", "support", "office", "scam", "legit", "money"]
             
-            # 3. Guardrail Logic: Auto-refuse if context is missing and query is off-brand
+            # 3. Guardrail Logic
             if not ctx and not any(k in prompt.lower() for k in skypay_keywords) and not is_ongoing_convo:
-                add_message(cid, "ai", OFF_TOPIC)
+                with st.spinner("Reviewing inquiry..."):
+                    time.sleep(1)
+                    add_message(cid, "ai", OFF_TOPIC)
             else:
+                # --- ADDED SPINNER FOR GROQ API CALL ---
                 with st.spinner("Skypay AI is working on your answer..."):
                     try:
-                        # REFINED SYSTEM PROMPT with strict trigger logic
                         sys_p = (
                             f"You are a strict customer support agent for SkyPay. "
-                            f"Your ONLY purpose is to answer questions about Skypay services, payments, and office details. "
+                            f"Your ONLY purpose is to answer questions about Skypay services. "
                             f"Context: {ctx}. "
                             f"RULES:\n"
                             f"1. Use the Context to answer naturally.\n"
-                            f"2. If the user asks general knowledge questions unrelated to Skypay, YOU MUST REPLY: '{OFF_TOPIC}'\n"
-                            f"3. If the answer is NOT in the context or you are UNSURE, YOU MUST REPLY: '{UNSURE}'\n"
-                            f"4. NEVER say 'I have escalated this'. Users must click the button manually."
+                            f"2. If unrelated, reply: '{OFF_TOPIC}'\n"
+                            f"3. If unsure, reply: '{UNSURE}'"
                         )
                         
                         msgs = [{"role": "system", "content": sys_p}]
@@ -297,7 +324,14 @@ if prompt:
 # =========================
 if not human_active and show_esc:
     st.divider()
-    st.info("Need more specific help? You can connect with a human agent.")
+    
+    # Custom Bordered Container for the Escalation Message
+    st.markdown("""
+        <div class="escalation-box">
+            I didn't quite get that. Would you like to talk to a Support Agent?
+        </div>
+    """, unsafe_allow_html=True)
+    
     if st.button("👩‍💻 Talk to a Support Agent"):
         set_status(cid, "escalated")
         add_message(cid, "system", "User requested human agent. Support notified.")
