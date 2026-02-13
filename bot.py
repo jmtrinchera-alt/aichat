@@ -30,6 +30,20 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
+st.markdown("""
+    <style>
+        /* Hides the hamburger menu */
+        #MainMenu {visibility: hidden;}
+        /* Hides the "Built with Streamlit" footer */
+        footer {visibility: hidden;}
+        /* Hides the top decoration bar */
+        header {visibility: hidden;}
+        /* Hides the fullscreen button and status widget */
+        [data-testid="stStatusWidget"] {display: none;}
+        button[title="View fullscreen"] {display: none;}
+    </style>
+""", unsafe_allow_html=True)
+
 # =========================
 # Page Configuration
 # =========================
@@ -367,3 +381,4 @@ if not human_active and show_esc:
             else:
                 st.error("Failed to send email alert. Please check connection.")
         st.rerun()
+
