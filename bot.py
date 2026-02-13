@@ -10,15 +10,25 @@ from database import *
 # =========================
 # Hide Streamlit Branding
 # =========================
+# --- HIDE STREAMLIT BRANDING & FULLSCREEN ---
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
-            /* This part removes the 'viewer' padding at the top */
-            .embedded_metadata_with_no_footer { display: none !important; }
+            
+            /* Target the bottom right toolbar/fullscreen button */
+            [data-testid="stStatusWidget"] {display: none;}
+            .stActionButton {display: none;}
+            button[title="View fullscreen"] {display: none;}
+            
+            /* Remove extra padding at the bottom */
+            .main .block-container {
+                padding-bottom: 0px;
+            }
             </style>
             """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # =========================
 # Page Configuration
