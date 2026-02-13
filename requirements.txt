@@ -1,7 +1,8 @@
 streamlit
 streamlit-autorefresh
-st-keyup
+streamlit-keyup
 pymongo
 groq
 thefuzz
+
 python-dotenv
