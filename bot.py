@@ -8,10 +8,24 @@ from groq import Groq
 from database import *
 
 # =========================
+# Hide Streamlit Branding
+# =========================
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            /* This part removes the 'viewer' padding at the top */
+            .embedded_metadata_with_no_footer { display: none !important; }
+            </style>
+            """
+
+# =========================
 # Page Configuration
 # =========================
 st.set_page_config(page_title="Skypay Support Bot", page_icon="🤖", layout="wide")
-st_autorefresh(interval=3000) 
+st.markdown(hide_st_style, unsafe_allow_html=True) # Apply the hiding CSS
+st_autorefresh(interval=3000)
 
 # Initialize DB
 init_db()
