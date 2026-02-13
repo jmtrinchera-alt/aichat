@@ -24,16 +24,44 @@ except Exception as e:
     st.stop()
 
 # CSS for FAQ buttons
-st.markdown("""
+st.markdown(f"""
     <style>
-        div.stButton > button:first-child {
-            width: 100%;
-            height: auto;
-            min-height: 70px;
-            border-radius: 10px;
-            text-align: left;
-            font-size: 14px;
-        }
+        .stApp {{ background-color: #ffffff; }}
+        
+        /* Hello & Ticket text to Black */
+        h1, h2, h3, [data-testid="stHeader"] {{
+            color: #000000 !important;
+            font-weight: 700 !important;
+        }}
+
+        /* Force Black Text in Chat */
+        [data-testid="stChatMessageContent"] p {{
+            color: #000000 !important;
+        }}
+
+        /* User Message Bubble - Sky Blue */
+        .stChatMessage:has([data-testid="chatAvatarIcon-user"]) {{
+            background-color: #7dcef4;
+            border-radius: 15px 15px 0px 15px;
+        }}
+        
+        /* Assistant Message Bubble - Neutral Gray */
+        .stChatMessage:has([data-testid="chatAvatarIcon-assistant"]) {{
+            background-color: #f1f3f4;
+            border: 1px solid #929a9f;
+            border-radius: 15px 15px 15px 0px;
+        }}
+
+        /* Sidebar - Deep Blue */
+        [data-testid="stSidebar"] {{ background-color: #023e8a; }}
+        [data-testid="stSidebar"] * {{ color: #ffffff !important; }}
+
+        /* FAQ Buttons - Action Blue */
+        div.stButton > button {{
+            border: 2px solid #0068b7;
+            color: #0068b7;
+            background-color: #ffffff;
+        }}
     </style>
 """, unsafe_allow_html=True)
 
