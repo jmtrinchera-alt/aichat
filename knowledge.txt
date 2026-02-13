@@ -1,0 +1,48 @@
+### SKYPAY COMPANY OVERVIEW
+Skybridge Payment, Inc. (doing business as SKYPAY) is a Philippines-based fintech company specializing in payment gateway services and digital payment solutions[cite: 415, 436].
+The company is officially licensed by the Bangko Sentral ng Pilipinas (BSP) as an Operator of Payment System (OPS)[cite: 416, 430].
+SkyPay is a legitimate SEC-registered and secured fintech firm operated by Skybridge Payments Inc[cite: 432, 446, 447].
+SkyPay is NOT a loaning or lending company and does not provide credit, financing services, or directly extend financial credit to customers[cite: 402, 419, 444].
+The company operates as a B2B payment infrastructure provider and a payment bridge connecting merchants, financial institutions, lenders, billers, and enterprise platforms[cite: 401, 408, 417].
+
+### CORE SERVICES & IDENTITY
+SkyPay functions as a backend payment infrastructure provider enabling organizations to process payments, collections, and billing transactions[cite: 403, 424].
+Services include Over-the-Counter (OTC) and digital payment collections, cash payouts, and bills payment for over 200 biller partners[cite: 404, 438].
+Value-added services include Buy Load, Top Up, and Cash In[cite: 438].
+Disbursement channels supported: InstaPay, PESONet, and various e-wallets like GCash, PayMaya, and Coins.ph[cite: 439].
+SkyPay provides API-based integrations for transaction posting, payment validation, and reference number verification[cite: 405, 425].
+
+### OPERATIONAL INFORMATION & CONTACT
+Main Office: Unit 3305, 33rd Floor, The Podium West Tower, ADB Avenue, Ortigas Center, Mandaluyong City[cite: 421, 440].
+Secondary Office: Unit T-2902, 29th Floor, SM Mega Tower, Brgy. Wack-Wack, Mandaluyong City 1555[cite: 422, 441].
+Office Hours: Monday to Friday, 9:00 AM to 6:00 PM (Philippine Time). Closed on weekends and holidays[cite: 404, 423, 437].
+Support Email: cs@skypay.ph[cite: 424, 441].
+Landline: +63 5328 5320[cite: 424, 442].
+Globe Mobile: +63 927 558 0175 / +63 927 558 0141[cite: 424, 442].
+Smart Mobile: +63 999 590 3042 / +63 999 590 3040[cite: 424, 442].
+
+### TYPICAL PAYMENT FLOW & USAGE
+1. Merchant or lender generates a payment reference number[cite: 410, 427].
+2. Customer pays through supported channels such as 7-Eleven, GCash, PayMaya, QR Ph, or Banks[cite: 411, 428].
+3. SkyPay processes, routes, and posts the transaction to the partner system[cite: 412, 429].
+4. Reporting and reconciliation records are generated[cite: 412, 429].
+Digital Payment Usage: Select 'e-wallet' on a merchant's website to generate a QR code, then scan and confirm[cite: 442].
+OTC Payment Usage: Provide contract and mobile number to a cashier at any of SkyPay's 19,000+ collection partners nationwide[cite: 443].
+
+### COMMON DEFINITIONS & GUIDANCE
+Late Check: A payment marked as "late check" means the payment was completed after the official due date[cite: 407, 433].
+Why did I receive a notice?: A merchant or lender used SkyPay’s system to process your transaction[cite: 434].
+Support Guidance: For API or integration issues, contact the QA Team or Integration Team[cite: 405, 435].
+Support Guidance: For payment-related concerns, contact official SkyPay support channels[cite: 406, 435].
+Important Note: Any money collected via SkyPay for loans originates from third-party loaning apps/companies, not from SkyPay itself[cite: 420, 445].
+
+### IMPORTANT NOTE ON SUDDEN FUNDS
+If a user receives money suddenly in their account and SkyPay is mentioned, it is NOT money given by SkyPay[cite: 420, 444]. 
+SkyPay is only the technology bridge used to facilitate the transfer[cite: 401, 418]. 
+The funds actually originate from a third-party loaning app or company that the user previously clicked on or used.
+SkyPay does not issue loans and does not have the authority to "give" money to individuals directly[cite: 402, 414].
+
+### COMMON DEFINITIONS & FAQS
+...
+- Why did I receive money/notice suddenly?: This means a third-party merchant or lender you used processed a transaction through SkyPay's system[cite: 434].
+- Did SkyPay give me a loan?: No, the loan comes from a separate lending company; SkyPay only handles the payment routing[cite: 431, 445].

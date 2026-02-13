@@ -1,0 +1,7 @@
+streamlit
+streamlit-autorefresh
+st-keyup
+pymongo
+groq
+thefuzz
+python-dotenv
