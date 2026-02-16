@@ -90,18 +90,17 @@ if "selected_id" not in st.session_state:
 with st.sidebar:
     st.header("🔍 Ticket Explorer")
     
-    # Status Toggle
+    # Updated Status Toggle with new AI Tab
     mode = st.segmented_control(
         "Filter by Status",
-        options=["🔥 Active", "📜 Closed"],
-        default="🔥 Active",
+        options=["🤖 AI Active", "🔥 Escalated", "📜 Closed"],
+        default="🔥 Escalated",
         selection_mode="single",
         label_visibility="collapsed"
     )
     
     # --- REAL-TIME SEARCH FEATURE ---
     if HAS_KEYUP:
-        # This triggers every keystroke
         search_query = st_keyup(
             "Search Name, Email, or Ticket ID", 
             key="ticket_search", 
@@ -110,19 +109,22 @@ with st.sidebar:
     else:
         search_query = st.text_input("Search Name, Email, or Ticket ID", key="ticket_search")
 
-    # Fetch data based on mode
-    all_convos = get_escalated_conversations() if mode == "🔥 Active" else get_closed_conversations()
+    # Fetch data based on mode including the new AI Active pool
+    if mode == "🤖 AI Active":
+        all_convos = get_ai_active_conversations()
+    elif mode == "🔥 Escalated":
+        all_convos = get_escalated_conversations()
+    else:
+        all_convos = get_closed_conversations()
     
     # Filter Logic (Instant feedback)
     filtered = []
     if search_query:
         q = search_query.lower()
         for c in all_convos:
-            # c indices: 0:id, 1:name, 2:concern, 3:ticket_id, 4:email, 5:created_at
             name_txt = (c[1] or "").lower()
             tid_txt = (c[3] or "").lower()
             email_txt = (c[4] or "").lower()
-            
             if q in name_txt or q in tid_txt or q in email_txt:
                 filtered.append(c)
     else:
@@ -136,7 +138,7 @@ with st.sidebar:
     for convo in filtered:
         c_id, name, concern, t_id, email, created_at = convo
         
-        status_icon = "🔵" if mode == "🔥 Active" else "🔘"
+        status_icon = "🤖" if mode == "🤖 AI Active" else "🔥" if mode == "🔥 Escalated" else "🔘"
         card_label = f"{status_icon} **{t_id}**\n👤 {name or 'Guest'}\n📧 {email or 'No Email'}"
         
         if st.button(card_label, key=f"btn_{c_id}"):
@@ -158,12 +160,13 @@ if selected_data:
         with col1:
             st.write(f"**Customer:** {s_name}")
             st.write(f"**Email:** {s_email}")
-            st.write(f"**Escalated:** {format_timestamp(s_created)}")
+            st.write(f"**Escalated/Created:** {format_timestamp(s_created)}")
         with col2:
             st.write(f"**Topic:** {s_concern}")
             st.write(f"**Status:** {mode}")
 
-    if mode == "🔥 Active": 
+    # Set status to human_active ONLY if in Escalated mode
+    if mode == "🔥 Escalated": 
         set_status(s_id, "human_active")
     
     # Message History
@@ -173,8 +176,16 @@ if selected_data:
             with st.chat_message(r, avatar=get_avatar(r)):
                 st.write(f"👩‍💻 (You): {c}" if r == "human" else c)
     
-    # Input Actions
-    if mode == "🔥 Active":
+    # Input Actions based on Status
+    if mode == "🤖 AI Active":
+        st.info("👀 You are currently shadowing an AI conversation.")
+        # NEW Feature: Manual Takeover
+        if st.button("🙋‍♂️ Take Over Chat", use_container_width=True, type="primary"):
+            set_status(s_id, "escalated")
+            add_message(s_id, "system", "Agent manually joined the conversation.")
+            st.rerun()
+
+    elif mode == "🔥 Escalated":
         reply = st.chat_input("Type your response...")
         if reply:
             add_message(s_id, "human", reply)
