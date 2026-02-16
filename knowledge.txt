@@ -1,48 +1,209 @@
-### SKYPAY COMPANY OVERVIEW
-Skybridge Payment, Inc. (doing business as SKYPAY) is a Philippines-based fintech company specializing in payment gateway services and digital payment solutions[cite: 415, 436].
-The company is officially licensed by the Bangko Sentral ng Pilipinas (BSP) as an Operator of Payment System (OPS)[cite: 416, 430].
-SkyPay is a legitimate SEC-registered and secured fintech firm operated by Skybridge Payments Inc[cite: 432, 446, 447].
-SkyPay is NOT a loaning or lending company and does not provide credit, financing services, or directly extend financial credit to customers[cite: 402, 419, 444].
-The company operates as a B2B payment infrastructure provider and a payment bridge connecting merchants, financial institutions, lenders, billers, and enterprise platforms[cite: 401, 408, 417].
+"SkyPay provides innovative service technology solutions for financial transactions using various techniques linking diverse companies to provide both over-the-counter and digital payment solutions."
 
-### CORE SERVICES & IDENTITY
-SkyPay functions as a backend payment infrastructure provider enabling organizations to process payments, collections, and billing transactions[cite: 403, 424].
-Services include Over-the-Counter (OTC) and digital payment collections, cash payouts, and bills payment for over 200 biller partners[cite: 404, 438].
-Value-added services include Buy Load, Top Up, and Cash In[cite: 438].
-Disbursement channels supported: InstaPay, PESONet, and various e-wallets like GCash, PayMaya, and Coins.ph[cite: 439].
-SkyPay provides API-based integrations for transaction posting, payment validation, and reference number verification[cite: 405, 425].
+About SKYPAY: Established in August 2018, SKYPAY is a Bangko Sentral ng Pilipinas-licensed Operator of Payment System (OPS) and a SEC-registered fintech company in the Philippines, committed to delivering innovative and secure financial technology solutions.
 
-### OPERATIONAL INFORMATION & CONTACT
-Main Office: Unit 3305, 33rd Floor, The Podium West Tower, ADB Avenue, Ortigas Center, Mandaluyong City[cite: 421, 440].
-Secondary Office: Unit T-2902, 29th Floor, SM Mega Tower, Brgy. Wack-Wack, Mandaluyong City 1555[cite: 422, 441].
-Office Hours: Monday to Friday, 9:00 AM to 6:00 PM (Philippine Time). Closed on weekends and holidays[cite: 404, 423, 437].
-Support Email: cs@skypay.ph[cite: 424, 441].
-Landline: +63 5328 5320[cite: 424, 442].
-Globe Mobile: +63 927 558 0175 / +63 927 558 0141[cite: 424, 442].
-Smart Mobile: +63 999 590 3042 / +63 999 590 3040[cite: 424, 442].
+About SKYPAY: Established in August 2018, SKYPAY is a Bangko Sentral ng Pilipinas-licensed Operator of Payment System (OPS) and a SEC-registered fintech company in the Philippines, committed to delivering innovative and secure financial technology solutions. We deliver powerful, secure, and seamless payment solutions for businesses of all sizes. We connect billers, merchants, and partners, creating an effortless, convenient, and secure experience for customers. Our mission is to help businesses innovate by removing barriers through advanced, customizable financial solutions.
 
-### TYPICAL PAYMENT FLOW & USAGE
-1. Merchant or lender generates a payment reference number[cite: 410, 427].
-2. Customer pays through supported channels such as 7-Eleven, GCash, PayMaya, QR Ph, or Banks[cite: 411, 428].
-3. SkyPay processes, routes, and posts the transaction to the partner system[cite: 412, 429].
-4. Reporting and reconciliation records are generated[cite: 412, 429].
-Digital Payment Usage: Select 'e-wallet' on a merchant's website to generate a QR code, then scan and confirm[cite: 442].
-OTC Payment Usage: Provide contract and mobile number to a cashier at any of SkyPay's 19,000+ collection partners nationwide[cite: 443].
+Our Vision: We aim to provide comprehensive payment services, both online and offline, including collections, disbursements, acquiring, remittances, and cross-border transactions. By simplifying and digitizing every process, we ensure speed, convenience, and security for our partners and customers.
 
-### COMMON DEFINITIONS & GUIDANCE
-Late Check: A payment marked as "late check" means the payment was completed after the official due date[cite: 407, 433].
-Why did I receive a notice?: A merchant or lender used SkyPay’s system to process your transaction[cite: 434].
-Support Guidance: For API or integration issues, contact the QA Team or Integration Team[cite: 405, 435].
-Support Guidance: For payment-related concerns, contact official SkyPay support channels[cite: 406, 435].
-Important Note: Any money collected via SkyPay for loans originates from third-party loaning apps/companies, not from SkyPay itself[cite: 420, 445].
+Global Reach, Local Expertise: SKYPAY enables fast, reliable payments across the Philippines and supports cross-border transactions in Taiwan, Singapore, South Korea, Japan, Hong Kong, China, and Vietnam. Our solutions empower businesses to operate seamlessly on a global scale while streamlining local operations.
 
-### IMPORTANT NOTE ON SUDDEN FUNDS
-If a user receives money suddenly in their account and SkyPay is mentioned, it is NOT money given by SkyPay[cite: 420, 444]. 
-SkyPay is only the technology bridge used to facilitate the transfer[cite: 401, 418]. 
-The funds actually originate from a third-party loaning app or company that the user previously clicked on or used.
-SkyPay does not issue loans and does not have the authority to "give" money to individuals directly[cite: 402, 414].
 
-### COMMON DEFINITIONS & FAQS
-...
-- Why did I receive money/notice suddenly?: This means a third-party merchant or lender you used processed a transaction through SkyPay's system[cite: 434].
-- Did SkyPay give me a loan?: No, the loan comes from a separate lending company; SkyPay only handles the payment routing[cite: 431, 445].
+Bangko Sentral ng Pilipinas-licensed Operator of Payment System (OPS)
+
+SkyPay is a Payment Gateway linking our Biller and Merchant partners to provide collection and disbursement solutions.
+
+Over-the-counter Payment Collection
+Customers can go to any of our merchant partners nationwide to pay for their bills etc.
+
+
+Over-the-counter Cash Payout
+Customer can go to any of our merchant partner nationwide to claim their cash.
+
+
+Digital Payment Collection and Cash Payout
+Customers can access all online partners such as GCASH, PayMaya, Coins.ph etc. to pay their bills and claim their cash.
+
+
+Digital Payment
+Customer will have different options to pay their online purchases with our current list of digital payment.
+
+
+Value Added Services
+Aside from Collections and Payout, SkyPay offers different services such as Buy Load, Top Up, Cash In, etc.
+
+
+SKYPAY Mobile Application
+Developing Stage
+
+
+Domestic and International Remittance
+Coming soon
+
+
+Foreign Exchange
+Coming soon
+
+How it works
+SKYPAY is a Payment Solution provider company.
+As the country’s fastest growing payment solution provider, SKYPAY is dedicated in giving our partners the most advanced and secured payment experience in the market.
+
+We are a Payment Solution provider bridging our merchant and biller partners to provide both over-the-counter and digital collection and payout services. Our goal is to deliver an easy, convenient and secured customer experience.
+
+Payment Collection
+Customers can go to any Collection Partner of SkyPay to do Bills Payment.
+
+Over-The-Counter
+
+Customer goes to any collection partner of SkyPay.
+
+
+Customer provides contract number and mobile number to cashier.
+
+
+Cashier collects payment from customer.
+
+
+An acknowledgement receipt will be printed and given to the customer.
+
+
+Transaction will be posted to the respective Biller Partner.
+
+Digital Payment
+
+From the MERCHANT’S website, customer selects e-wallet as mode of payment then a QR code will be generated.
+
+
+Customer scans the QR code and confirms the amount to be deducted from the account.
+
+
+A confirmation page will be displayed verifying that the transaction is successful then customer will be redirected back to the MERCHANT’S website.
+
+Credit/Debit Card
+
+From the MERCHANT’S website, customer selects Credit Card or Debit Card as mode of payment and enters card details in the card payment page then click PAY.
+
+
+Enter the OTP code sent to registered email address or SMS.
+
+
+A confirmation page will be displayed verifying that the transaction is successful then customer will be redirected back to the MERCHANT’S website.
+
+Direct Banking
+
+From the MERCHANT’S website, customer selects Direct Banking as mode of payment and selects preferred bank. Customer will be redirected to chosen Bank’s Web Banking page.
+
+
+Enter the OTP code sent to registered email address or SMS.
+
+
+Confirm and authorize the online Payment.
+
+Cash Disbursement
+Customers can go to any Disbursement Partner of SkyPay to claim their cash.
+
+Over-The-Counter
+
+Beneficiary goes to any disbursement partner of SkyPay and fill out both KYC and Withdrawal forms.
+
+
+Beneficiary provides contract number and mobile number of the sender.
+
+
+Cashier disburses cash.
+
+
+An acknowledgement receipt will be printed and given to the beneficiary.
+
+
+Transaction amount will be deducted to the Biller Partner’s portal wallet.
+
+E-Wallet Disbursement
+
+Customer selects preferred e-wallet as mode of disbursement.
+
+
+Customer will receive an SMS confirmation that his loan application is approved.
+
+
+Customer will receive an SMS confirmation from the preferred bank that the amount is credited to his account.
+
+InstaPay and PESONet Disbursement
+
+Customer selects preferred bank as mode of disbursement.
+
+
+Customer will receive an SMS confirmation that his loan application is approved.
+
+
+Customer will receive an SMS confirmation from the preferred bank that the amount is credited to his account.
+
+Landline: +63 5328 5320
+Phone(Globe): +639275580175 / +639275580141
+Phone(Smart): +639995903042 / +639995903040
+
+Email: cs@skypay.ph
+
+Who is SkyPay?
+SkyPay is a facilitator of payment transactions through our various channels, over the counter and online channels, both for Collections and Payout. SkyPay is not held liable in any callouts from agents forcing our customers to settle their balance to their own personal accounts using the name of SKYPAY.
+
+Who are your Collection and Payout Partners?
+Collection Partners
+
+Over-the-Counter Channels
+7-eleven
+Mlhuillier
+RD Pawnshop
+Cebuana Lhuillier
+TrueMoney
+Online Channels
+GCash
+PayMaya
+FastPay
+ShopeePay
+Payout Partners
+
+Over-the-Counter Channels
+Mlhuillier
+RD Pawnshop
+LBC
+Online Channels
+GCash
+PayMaya
+Coins.ph
+InstaPay Member Banks
+Note: Only accredited collection partners of SkyPay listed above are allowed to collect on behalf our Biller Partners. Do not entertain any calls, messages or email from unauthorized person instructing you to settle your payment to their personal account. SkyPay is in any form not connected to such activities.
+
+Who is SkyPay’s target market?
+Skypay connects to various biller partners in any field of business nationwide who needs collection and payout facilities. To accommodate those requirements, SkyPay tie up with different merchant partners such as banks, pawnshops and more to do the collection of payments and disbursement of money.
+
+What is the SkyPay Mobile Application?
+SkyPay Mobile Application will grant its users a virtual bank account in partnership with AUB HelloMoney that can be used to PAY their Bills, Send Money to their loved ones, Top Up their online wallets, Buy Load and more.
+
+Powerful payment solutions with strong integration capability to serve a multitude of businesses.
+SKYPAY is a Payment Solution provider that connects billers and merchants to deliver an easy, convenient, and secured customer experience. Our goal is to innovate businesses by eliminating barriers with our customizable and advanced solutions.
+
+
+SKYPAY is a Payment Gateway linking diverse companies to provide over-the-counter & digital collections, as well as a range of payout solutions.
+
+SKYPAY is a technology-enabling company focused on digitalizing businesses through our hardware and software customizable to our partner’s specific needs and branding. Our solution aims to resolve payment issues and eliminate manual processing.
+
+Vision
+As the country’s fastest-growing payment solution provider, SKYPAY is dedicated to giving our partners the most advanced technology and secured payment experience in the market.
+
+Mission
+Our mission is to elevate our partners’ competitive advantage through our advanced technology and customizable payment solutions. We aim to simplify and digitalize every process to give convenience and security to our partners.
+
+Company Values
+Safety is our priority – We ensure that our partners will have secured payment experience.
+Keeps you on track – We ensure the flexibility of our solutions we offer to our partners.
+Your Trust is valued – We make sure to fulfill our responsibilities to our partners.
+Promotes advancement – We are focused on digitalizing every business in the country.
+All in one – We provide complete and easy to use solutions to our partners.
+Your reliable partner – We are focused on satisfying our partner’s requirements.
+
+
+
+
+
+
