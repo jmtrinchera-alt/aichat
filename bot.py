@@ -10,19 +10,14 @@ from database import *
 # =========================
 # Hide Streamlit Branding
 # =========================
-# --- HIDE STREAMLIT BRANDING & FULLSCREEN ---
 hide_st_style = """
             <style>
             #MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
-            
-            /* Target the bottom right toolbar/fullscreen button */
             [data-testid="stStatusWidget"] {display: none;}
             .stActionButton {display: none;}
             button[title="View fullscreen"] {display: none;}
-            
-            /* Remove extra padding at the bottom */
             .main .block-container {
                 padding-bottom: 0px;
             }
@@ -30,25 +25,10 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
-st.markdown("""
-    <style>
-        /* Hides the hamburger menu */
-        #MainMenu {visibility: hidden;}
-        /* Hides the "Built with Streamlit" footer */
-        footer {visibility: hidden;}
-        /* Hides the top decoration bar */
-        header {visibility: hidden;}
-        /* Hides the fullscreen button and status widget */
-        [data-testid="stStatusWidget"] {display: none;}
-        button[title="View fullscreen"] {display: none;}
-    </style>
-""", unsafe_allow_html=True)
-
 # =========================
 # Page Configuration
 # =========================
 st.set_page_config(page_title="Skypay Support Bot", page_icon="🤖", layout="wide")
-st.markdown(hide_st_style, unsafe_allow_html=True) # Apply the hiding CSS
 st_autorefresh(interval=3000)
 
 # Initialize DB
@@ -62,10 +42,8 @@ except Exception as e:
     st.stop()
 
 # CSS for UI Styling
-# CSS for Skypay Support Bot - Consolidated Style
 st.markdown(f"""
     <style>
-        /* 0. FORCE LIGHT THEME BASE */
         :root {{
             --background-color: #ffffff;
             --secondary-background-color: #eeeeee;
@@ -76,19 +54,15 @@ st.markdown(f"""
             background-color: #ffffff !important; 
         }}
         
-        /* 1. GLOBAL TEXT - Force everything to Black */
-        /* Except inside buttons and sidebar */
         .stAppHost, .stApp, .stApp * {{
             color: #000000;
         }}
 
-        /* 2. HEADERS & LABELS */
         h1, h2, h3, [data-testid="stHeader"], [data-testid="stWidgetLabel"] p {{
             color: #000000 !important;
             font-weight: 700 !important;
         }}
 
-        /* 3. INPUT FIELDS & DROPDOWNS - Light Gray */
         div[data-baseweb="input"], 
         div[data-baseweb="select"] > div, 
         div[data-baseweb="base-input"] {{
@@ -97,13 +71,11 @@ st.markdown(f"""
             border-radius: 8px !important;
         }}
 
-        /* Force Black Text for typing and selection */
         input, textarea, [data-testid="stSelectbox"] div {{
             color: #000000 !important;
             -webkit-text-fill-color: #000000 !important;
         }}
 
-        /* 4. CHAT INPUT (TALK TO AI) - Blue Border & White BG */
         [data-testid="stChatInput"] {{
             background-color: #ffffff !important;
             border-top: 1px solid #eeeeee !important;
@@ -118,7 +90,6 @@ st.markdown(f"""
             -webkit-text-fill-color: #000000 !important;
         }}
 
-        /* 5. UNIFIED BUTTONS - Dark Blue with White Text */
         div.stButton > button, [data-testid="stForm"] button {{
             background-color: #023e8a !important; 
             border: 2px solid #023e8a !important; 
@@ -129,19 +100,16 @@ st.markdown(f"""
             font-weight: 600 !important;
         }}
 
-        /* Force button labels to stay white */
         div.stButton > button p, [data-testid="stForm"] button p {{
             color: #ffffff !important;
         }}
 
-        /* GREEN HOVER STATE for all buttons */
         div.stButton > button:hover, [data-testid="stForm"] button:hover {{
             background-color: #28a745 !important; 
             border-color: #28a745 !important;
             color: #ffffff !important;
         }}
 
-        /* 6. CHAT BUBBLES */
         [data-testid="stChatMessageContent"] p {{ 
             color: #000000 !important; 
         }}
@@ -154,7 +122,7 @@ st.markdown(f"""
             background-color: #f1f3f4 !important;
         }}
 
-        /* 7. ESCALATION BOX - Light Blue Border */
+        /* ESCALATION BOX */
         .escalation-box {{
             border: 1px solid #7dcef4 !important;
             border-radius: 10px;
@@ -165,7 +133,28 @@ st.markdown(f"""
             font-weight: 500;
         }}
 
-        /* 8. SIDEBAR - Preserve Deep Blue with White Text */
+        /* YELLOW ESCALATION STATUS CARD */
+        .escalation-active-card {{
+            background-color: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 10px;
+            padding: 15px;
+            color: #92400e;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }}
+
+        .resolved-card-container {{
+            background-color: #ffffff;
+            border: 2px solid #28a745;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }}
+
         [data-testid="stSidebar"] {{ 
             background-color: #023e8a !important; 
         }}
@@ -174,7 +163,6 @@ st.markdown(f"""
             color: #ffffff !important;
         }}
         
-        /* Ensure sidebar buttons also use white text */
         [data-testid="stSidebar"] button p {{
             color: #ffffff !important;
         }}
@@ -250,22 +238,33 @@ if status == 'onboarding':
 # CHAT INTERFACE
 # =========================
 st.title(f"🤖 Hello, {user_name}!")
+st.caption(f"Ticket ID: **{ticket_id}**") 
+
+# Define the closed states
+is_closed = status in ['resolved', 'closed']
 human_active = status in ['escalated', 'human_active']
 
-# Sidebar Testing Tools
+# Sidebar Testing Tools & TIPS (Features Preserved)
 with st.sidebar:
+    st.markdown("### 💡 Support Tips")
+    st.info("""
+    * **Be Specific:** Mention transaction IDs if you have them.
+    * **Office Hours:** We're active Mon-Fri, 9AM-6PM.
+    * **Privacy:** Don't share your full password or OTP.
+    """)
+    st.divider()
     if st.button("🚀 Simulate New Chat"):
         for key in list(st.session_state.keys()): del st.session_state[key]
         st.rerun()
 
 # Display FAQ Buttons
-if not human_active:
+if not human_active and not is_closed:
     st.markdown("### FAQs")
     cols = st.columns(3)
     for i, q in enumerate(list(PRESET_ANSWERS.keys())):
         if cols[i % 3].button(q): st.session_state.curr_prompt = q
 
-# --- DISPLAY MESSAGES & DYNAMIC ESCALATION DETECTION ---
+# --- DISPLAY MESSAGES ---
 db_msgs = get_messages(cid)
 show_esc = False
 
@@ -274,11 +273,9 @@ for r, c in db_msgs:
         with st.chat_message(r, avatar=get_avatar(r)):
             st.write(f"👩‍💻 {c}" if r == "human" else c)
 
-# FIX: Only trigger the button if the LAST AI message was a refusal
 if db_msgs:
     last_role, last_content = db_msgs[-1]
     if last_role == "ai":
-        # Check for specific refusal triggers
         is_refusal = (
             last_content.strip() == OFF_TOPIC or 
             last_content.strip() == UNSURE or 
@@ -288,92 +285,106 @@ if db_msgs:
         if is_refusal:
             show_esc = True
 
+# Yellow Escalation Card
 if human_active:
-    st.warning("⚠️ This chat is escalated to a Support Agent (9AM - 6PM).")
+    st.markdown("""
+        <div class="escalation-active-card">
+            ⚠️ This chat is escalated to a Support Agent (9AM - 6PM).
+        </div>
+    """, unsafe_allow_html=True)
 
 # =========================
 # INPUT HANDLING
 # =========================
-u_input = st.chat_input("Message the agent..." if human_active else "Ask about Skypay...")
-prompt = st.session_state.get("curr_prompt") or u_input
-
-if prompt:
-    if "curr_prompt" in st.session_state: del st.session_state["curr_prompt"]
+if is_closed:
+    # --- IMPROVED RESOLVED UI (Survey Button) ---
+    st.markdown("---")
+    st.markdown(f"""
+        <div class="resolved-card-container">
+            <h2 style="color: #28a745; margin-bottom: 10px;">✅ Conversation Resolved</h2>
+            <p style="color: #1a1a1a; font-size: 1.1em;">
+                Ticket ID: <strong>{ticket_id}</strong>
+            </p>
+            <p style="color: #666; margin-bottom: 20px;">
+                This support session has ended. We hope your inquiry was handled to your satisfaction.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
     
-    # 1. Save User Message
-    add_message(cid, "user", prompt)
-    
+    # Satisfaction Survey Button (Not linked yet)
+    if st.button("📝 Take a satisfaction survey", type="primary", use_container_width=True):
+        pass
+        
+    st.chat_input("Chat disabled - Ticket Closed", disabled=True)
+else:
+    # Tip placed at the bottom, above chat field
     if not human_active:
-        # --- ADDED SPINNER FOR PRESET ANSWERS ---
-        if prompt in PRESET_ANSWERS:
-            with st.spinner("Skypay AI is thinking..."):
-                time.sleep(1) # Simulated delay
-                add_message(cid, "ai", PRESET_ANSWERS[prompt])
-        else:
-            # 2. History & Context
-            history = get_messages(cid)
-            is_ongoing_convo = len(history) > 3 
+        st.info("💡 **Tip:** SkyPay AI might take a few moments to process your inquiry and provide the most accurate information.")
+    
+    u_input = st.chat_input("Message the agent..." if human_active else "Ask about Skypay...")
+    prompt = st.session_state.get("curr_prompt") or u_input
 
-            ctx = get_fuzzy_context(prompt)
-            skypay_keywords = ["skypay", "skybridge", "payment", "bills", "loan", "support", "office", "scam", "legit", "money"]
-            
-            # 3. Guardrail Logic
-            if not ctx and not any(k in prompt.lower() for k in skypay_keywords) and not is_ongoing_convo:
-                with st.spinner("Reviewing inquiry..."):
+    if prompt:
+        if "curr_prompt" in st.session_state: del st.session_state["curr_prompt"]
+        add_message(cid, "user", prompt)
+        
+        if not human_active:
+            if prompt in PRESET_ANSWERS:
+                with st.spinner("Skypay AI is thinking..."):
                     time.sleep(1)
-                    add_message(cid, "ai", OFF_TOPIC)
+                    add_message(cid, "ai", PRESET_ANSWERS[prompt])
             else:
-                # --- ADDED SPINNER FOR GROQ API CALL ---
-                with st.spinner("Skypay AI is working on your answer..."):
-                    try:
-                        sys_p = (
-                            f"You are a strict customer support agent for SkyPay. "
-                            f"Your ONLY purpose is to answer questions about Skypay services. "
-                            f"Context: {ctx}. "
-                            f"RULES:\n"
-                            f"1. Use the Context to answer naturally.\n"
-                            f"2. If unrelated, reply: '{OFF_TOPIC}'\n"
-                            f"3. If unsure, reply: '{UNSURE}'"
-                        )
-                        
-                        msgs = [{"role": "system", "content": sys_p}]
-                        for r, c in history:
-                            if r in ["user", "ai", "human"]:
-                                role_map = "assistant" if r in ["ai", "human"] else "user"
-                                msgs.append({"role": role_map, "content": c})
-                        
-                        completion = client.chat.completions.create(
-                            model="llama-3.1-8b-instant", 
-                            messages=msgs,
-                            temperature=0.1, 
-                            max_tokens=500
-                        )
-                        
-                        reply = completion.choices[0].message.content
-                        add_message(cid, "ai", reply)
-                        
-                    except Exception as e:
-                        st.error(f"Error: {e}")
-
-    st.rerun()
+                history = get_messages(cid)
+                is_ongoing_convo = len(history) > 3 
+                ctx = get_fuzzy_context(prompt)
+                skypay_keywords = ["skypay", "skybridge", "payment", "bills", "loan", "support", "office", "scam", "legit", "money"]
+                
+                if not ctx and not any(k in prompt.lower() for k in skypay_keywords) and not is_ongoing_convo:
+                    with st.spinner("Reviewing inquiry..."):
+                        time.sleep(1)
+                        add_message(cid, "ai", OFF_TOPIC)
+                else:
+                    with st.spinner("Skypay AI is working on your answer..."):
+                        try:
+                            sys_p = (
+                                f"You are a strict customer support agent for SkyPay. "
+                                f"Your ONLY purpose is to answer questions about Skypay services. "
+                                f"Context: {ctx}. "
+                                f"RULES:\n"
+                                f"1. Use the Context to answer naturally.\n"
+                                f"2. If unrelated, reply: '{OFF_TOPIC}'\n"
+                                f"3. If unsure, reply: '{UNSURE}'"
+                            )
+                            msgs = [{"role": "system", "content": sys_p}]
+                            for r, c in history:
+                                if r in ["user", "ai", "human"]:
+                                    role_map = "assistant" if r in ["ai", "human"] else "user"
+                                    msgs.append({"role": role_map, "content": c})
+                            completion = client.chat.completions.create(
+                                model="llama-3.1-8b-instant", 
+                                messages=msgs,
+                                temperature=0.1, 
+                                max_tokens=500
+                            )
+                            reply = completion.choices[0].message.content
+                            add_message(cid, "ai", reply)
+                        except Exception as e:
+                            st.error(f"Error calling Groq API: {e}")
+        st.rerun()
 
 # =========================
 # ESCALATION
 # =========================
-if not human_active and show_esc:
+if not human_active and not is_closed and show_esc:
     st.divider()
-    
-    # Custom Bordered Container for the Escalation Message
     st.markdown("""
         <div class="escalation-box">
             I didn't quite get that. Would you like to talk to a Support Agent?
         </div>
     """, unsafe_allow_html=True)
-    
     if st.button("👩‍💻 Talk to a Support Agent"):
         set_status(cid, "escalated")
         add_message(cid, "system", "User requested human agent. Support notified.")
-        
         with st.spinner("Notifying support team via email..."):
             success = send_escalation_email(ticket_id, user_name, user_email, concern)
             if success:
@@ -381,4 +392,3 @@ if not human_active and show_esc:
             else:
                 st.error("Failed to send email alert. Please check connection.")
         st.rerun()
-
