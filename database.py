@@ -96,6 +96,22 @@ def set_status(conversation_id, status):
     db = get_db()
     db.conversations.update_one({"id": conversation_id}, {"$set": {"status": status}})
 
+# NEW: Added to allow monitoring of AI conversations
+def get_ai_active_conversations():
+    db = get_db()
+    cursor = db.conversations.find({"status": "bot"}).sort("created_at", -1)
+    return [
+        (
+            doc["id"], 
+            doc.get("user_name"), 
+            doc.get("concern"), 
+            doc.get("ticket_id"), 
+            doc.get("user_email"),
+            doc.get("created_at")
+        )
+        for doc in cursor
+    ]
+
 def get_escalated_conversations():
     db = get_db()
     cursor = db.conversations.find(
@@ -108,7 +124,7 @@ def get_escalated_conversations():
             doc.get("concern"), 
             doc.get("ticket_id"), 
             doc.get("user_email"),
-            doc.get("created_at")  # Added for Dashboard Escalation Time
+            doc.get("created_at")
         )
         for doc in cursor
     ]
@@ -123,7 +139,7 @@ def get_closed_conversations():
             doc.get("concern"), 
             doc.get("ticket_id"), 
             doc.get("user_email"),
-            doc.get("created_at")  # Added for Dashboard Resolution Time
+            doc.get("created_at")
         )
         for doc in cursor
     ]
