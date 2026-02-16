@@ -102,7 +102,14 @@ def get_escalated_conversations():
         {"status": {"$in": ["escalated", "human_active"]}}
     ).sort("created_at", -1)
     return [
-        (doc["id"], doc.get("user_name"), doc.get("concern"), doc.get("ticket_id"), doc.get("user_email"))
+        (
+            doc["id"], 
+            doc.get("user_name"), 
+            doc.get("concern"), 
+            doc.get("ticket_id"), 
+            doc.get("user_email"),
+            doc.get("created_at")  # Added for Dashboard Escalation Time
+        )
         for doc in cursor
     ]
 
@@ -110,7 +117,14 @@ def get_closed_conversations():
     db = get_db()
     cursor = db.conversations.find({"status": "closed"}).sort("created_at", -1)
     return [
-        (doc["id"], doc.get("user_name"), doc.get("concern"), doc.get("ticket_id"), doc.get("user_email"))
+        (
+            doc["id"], 
+            doc.get("user_name"), 
+            doc.get("concern"), 
+            doc.get("ticket_id"), 
+            doc.get("user_email"),
+            doc.get("created_at")  # Added for Dashboard Resolution Time
+        )
         for doc in cursor
     ]
 
@@ -124,7 +138,7 @@ def send_escalation_email(ticket_id, user_name, user_email, concern):
     # Credentials from Streamlit Secrets
     sender_email = st.secrets["EMAIL_USER"]
     password = st.secrets["EMAIL_PASS"]
-    receiver_email = "jm.trinchera@skypay.ph" #
+    receiver_email = "jm.trinchera@skypay.ph" 
 
     # FIX: Manually add 8 hours for Philippine Time
     pht_time = datetime.utcnow() + timedelta(hours=8)
